@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MaterialModule, ThemeModule } from '@nareshkumarh/theme';
+import { ThemeModule } from '@nareshkumarh/kt-theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthModule, JwtInterceptor } from 'auth';
@@ -30,7 +30,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
       USER_TYPE: 'T',
       ORG_ID: 'spinsoft',
     }),
-    MaterialModule,
     MatCheckboxModule,
     FormsModule,
     HttpClientModule,
@@ -38,7 +37,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AppRoutingModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

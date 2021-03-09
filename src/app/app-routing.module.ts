@@ -8,7 +8,7 @@ import { SearchComponent } from './components/search/search.component';
 const routes: Routes = [
   { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
   { path: 'courses', component: CourseListComponent, canActivate: [AuthGuard] },
-  { path: 'courses/:id', component: CourseComponent, canActivate: [] },
+  { path: 'courses/:id', component: CourseComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'courses', pathMatch: 'full' },
 ];
 

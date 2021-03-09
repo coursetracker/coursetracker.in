@@ -19,8 +19,10 @@ export class CourseService {
   }
 
   getCourseClient() {
-    this.headers['org'] = this.org;
-    this.headers['Authorization'] = `Bearer ${this.authService.getToken()}`;
+    this.headers['org'] = 'spinsoft';
+    if (this.authService.getToken()) {
+      this.headers['Authorization'] = `Bearer ${this.authService.getToken()}`;
+    }
     return new CourseClient({
       headers: this.headers,
       environment: environment.ENV,
@@ -35,6 +37,21 @@ export class CourseService {
 
   getCategories() {
     const url = environment.API_URL + 'v1/categories';
+    return this.http.get(url, { headers: this.getHeaders() });
+  }
+
+  getCourse(courseId) {
+    const url = environment.API_URL + 'v1/courses/' + courseId + '/content';
+    return this.http.get(url, { headers: this.getHeaders() });
+  }
+
+  getUserCourse(courseId, userId) {
+    const url =
+      environment.API_URL +
+      'v1/usercoursetopics/' +
+      courseId +
+      '/topics/' +
+      userId;
     return this.http.get(url, { headers: this.getHeaders() });
   }
 }

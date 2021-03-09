@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "coursetracker-in-d5dec"
+  },
+  "targets": {
+    "coursetracker-in-d5dec": {
+      "hosting": {
+        "coursetracker": [
+          "coursetracker-in-d5dec"
+        ]
+      }
+    }
   }
 }

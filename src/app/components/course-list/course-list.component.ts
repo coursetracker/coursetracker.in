@@ -38,6 +38,7 @@ export class CourseListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.listCategories();
     this.list();
     //this.listCategories();
   }
@@ -60,6 +61,7 @@ export class CourseListComponent implements OnInit {
 
   listCategories() {
     this.courseService.getCategories().subscribe((res) => {
+      console.log(res);
       this.categoryList = res;
     });
   }
@@ -122,14 +124,6 @@ export class CourseListComponent implements OnInit {
     this.reportData.push({ label: 'Topics', value: topics });
   }
 
-  // menus = "Add Course";
-
-  // @Output() menu = new EventEmitter();
-  // public sendMenus() {
-  //   console.log("Send Menus called from courselist");
-  //   this.menu.emit(this.menus);
-  // }
-
   menus: any;
 
   navigate(category) {
@@ -160,22 +154,6 @@ export class CourseListComponent implements OnInit {
         access: true,
       });
     }
-  }
-
-  move(index, action) {
-    console.log(index, action);
-    alert(index + '-' + action);
-    if (action == 'UP') {
-    } else if (action == 'DOWN') {
-    }
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(AddCourseComponent, { width: '800px' });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      this.list();
-    });
   }
 
   courseFilter: string;

@@ -4,18 +4,23 @@
     </div>
   </div>
 </div>
+<div class="row" *ngIf="reportData">
+  <div class="col-2" *ngFor="let r of reportData;let i=index;">
+    <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+  </div>
+</div>
 <div class="row">
   <div class="col" *ngIf="course">
 
     Category: <span class="badge badge-info">{{course?.category}}</span> &nbsp;
 
-    &nbsp; Organization: <span class="badge badge-info">{{course?.orgId | uppercase}}</span> &nbsp;
+    &nbsp; Organization: <span class="badge badge-info">{{course?.organization | uppercase}}</span> &nbsp;
 
-    &nbsp;<span class="badge badge-primary">{{course.createdDate| date}}</span>
+    &nbsp;<span class="badge badge-primary">{{course.created_date| date}}</span>
     &nbsp;
     <small class="badge badge-primary sm-col-1" *ngIf="course.status==='PUBLISHED'">{{course.status}}</small>
     <small class="badge badge-danger" *ngIf="course.status!=='PUBLISHED'">{{course.status}}</small>
-    <small class="badge badge-danger" *ngIf="course.noOfTopics">{{course.noOfTopics}}</small>
+    Topics: <small class="badge badge-danger" *ngIf="course.noOfTopics">{{course.noOfTopics}}</small>
   </div>
 </div>
 <br />
@@ -23,16 +28,23 @@
   <kt-loading-bar></kt-loading-bar>
 </ng-template>
 
-<div *ngIf="modules else loading">
+<div *ngIf="course else loading">
   <div class="row">
-    <div class="col-4" *ngFor="let m of modules;let i=index">
+    <div class="col-4" *ngFor="let m of course.modules;let i=index">
       <div class="card card-custom gutter-b">
         <div class="card-header card-blue">
           Module #{{i+1}} - {{m.name}}
         </div>
         <div class="card-body">
           <ul>
-            <li *ngFor="let t of moduleTopics[m.name]">{{t.topicName}}</li>
+            <li *ngFor="let t of m.topics">
+              <span style="color:red" *ngIf="!usercoursetopics[t.code]">
+                {{t.name}}
+              </span>
+              <span *ngIf="usercoursetopics[t.code]">
+                {{t.name}}
+              </span>
+            </li>
           </ul>
         </div>
       </div>
