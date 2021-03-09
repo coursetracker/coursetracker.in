@@ -1,0 +1,53 @@
+<div class="sidebar">
+  <!-- <app-brand></app-brand> -->
+  <ul class="nav sidebar-menu" *ngIf="categories">
+
+    <li class="nav-item">
+      <a class="nav-link">
+        <i class="fas fa-home"> &nbsp;&nbsp; </i>
+        <span class="title">Categories</span>
+      </a>
+    </li>
+    <li class="nav-item" *ngFor="let ct of categories">
+      <mat-checkbox [(ngModel)]="ct.completed" (ngModelChange)="updateCategoryFilter(ct.name,$event.checked)">
+        {{ct.name}}
+      </mat-checkbox>
+    </li>
+  </ul>
+</div>
+
+<kt-page title="Courses" showSidebar="true">
+
+  <div class="row" *ngIf="reportData">
+    <div class="col-3" *ngFor="let r of reportData;let i=index;">
+      <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+    </div>
+  </div>
+  <ng-template #loading>
+    <kt-loading-bar></kt-loading-bar>
+  </ng-template>
+
+  <div *ngIf="courses else loading">
+    <div class="row">
+
+      <div class="col-4" *ngFor="let ct of getCategories();let i=index">
+        <div class="card card-custom gutter-b">
+          <div class="card-header card-blue">
+            {{ct.name}}
+          </div>
+          <div class="card-body">
+            <ul>
+              <li *ngFor="let c of filteredCourses[ct.name]">
+                <a routerLink="{{c.code}}">
+                  {{c.code}} - {{c.title}}
+                  <span class="badge badge-primary">{{c.noOfTopics}}
+                    Topics</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</kt-page>

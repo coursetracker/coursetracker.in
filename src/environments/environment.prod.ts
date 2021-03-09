@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  API_URL: 'https://knowledgetracker-java-api.herokuapp.com/api/',
+  ENV: 'PROD',
 };

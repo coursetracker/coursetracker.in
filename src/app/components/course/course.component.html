@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col" *ngIf="course">
+    <div class="page-title">{{course?.code}} - {{course?.title}}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col" *ngIf="course">
+
+    Category: <span class="badge badge-info">{{course?.category}}</span> &nbsp;
+
+    &nbsp; Organization: <span class="badge badge-info">{{course?.orgId | uppercase}}</span> &nbsp;
+
+    &nbsp;<span class="badge badge-primary">{{course.createdDate| date}}</span>
+    &nbsp;
+    <small class="badge badge-primary sm-col-1" *ngIf="course.status==='PUBLISHED'">{{course.status}}</small>
+    <small class="badge badge-danger" *ngIf="course.status!=='PUBLISHED'">{{course.status}}</small>
+    <small class="badge badge-danger" *ngIf="course.noOfTopics">{{course.noOfTopics}}</small>
+  </div>
+</div>
+<br />
+<ng-template #loading>
+  <kt-loading-bar></kt-loading-bar>
+</ng-template>
+
+<div *ngIf="modules else loading">
+  <div class="row">
+    <div class="col-4" *ngFor="let m of modules;let i=index">
+      <div class="card card-custom gutter-b">
+        <div class="card-header card-blue">
+          Module #{{i+1}} - {{m.name}}
+        </div>
+        <div class="card-body">
+          <ul>
+            <li *ngFor="let t of moduleTopics[m.name]">{{t.topicName}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
