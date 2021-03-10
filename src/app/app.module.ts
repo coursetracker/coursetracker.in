@@ -13,6 +13,8 @@ import { CourseComponent } from './components/course/course.component';
 import { CourseListComponent } from './components/course-list/course-list.component';
 import { AddCourseComponent } from './components/add-course/add-course.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CommonModule } from '@angular/common';
+import { UsercoursesComponent } from './usercourses/usercourses.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +23,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CourseComponent,
     CourseListComponent,
     AddCourseComponent,
+    UsercoursesComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     ThemeModule,
     AuthModule.forRoot({
       API_ENDPOINT: environment.API_URL,

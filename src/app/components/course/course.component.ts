@@ -6,6 +6,7 @@ import { CourseService } from 'src/app/course.service';
 import * as _ from 'lodash';
 import { DbService } from 'src/app/db.service';
 import { AuthService } from 'auth';
+//import { AuthService } from 'auth';
 
 @Component({
   selector: 'app-course',
@@ -23,7 +24,6 @@ export class CourseComponent implements OnInit {
   loggedInUsername: any;
 
   constructor(
-    private authService: AuthService,
     private courseService: CourseService,
     private router: Router,
     private route: ActivatedRoute,
@@ -31,9 +31,9 @@ export class CourseComponent implements OnInit {
     private dbService: DbService,
     public dialog: MatDialog
   ) {
-    this.loggedInUsername = this.authService.getLoggedInUsername();
     this.route.params.subscribe((params) => {
       this.courseId = params['id'];
+      this.loggedInUsername = params['username'];
     });
   }
 

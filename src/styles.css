@@ -6,3 +6,10 @@
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 @import "~ngx-toastr/toastr.css";
+
+.sidebar {
+  width: 400px !important;
+}
+.page.sidebar-open {
+  margin-left: 400px !important;
+}

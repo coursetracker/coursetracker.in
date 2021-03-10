@@ -9,17 +9,26 @@
       </a>
     </li>
     <li class="nav-item" *ngFor="let ct of categories">
+
       <mat-checkbox [(ngModel)]="ct.completed" (ngModelChange)="updateCategoryFilter(ct.name,$event.checked)">
         {{ct.name}}
       </mat-checkbox>
+      <ul class="nav">
+        <li class="nav-item" *ngFor="let c of filteredCourses[ct.name]">
+          &nbsp;&nbsp;&nbsp;
+          <mat-checkbox [(ngModel)]="ct.completed" (ngModelChange)="updateCategoryFilter(ct.name,$event.checked)">
+            {{c.course_name}}
+          </mat-checkbox>
+        </li>
+      </ul>
     </li>
   </ul>
 </div>
 
-<kt-page title="Courses" showSidebar="true">
+<kt-page title="Courses - {{loggedInUser | uppercase}}" showSidebar="true">
 
   <div class="row" *ngIf="reportData">
-    <div class="col-3" *ngFor="let r of reportData;let i=index;">
+    <div class="col-2" *ngFor="let r of reportData;let i=index;">
       <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
     </div>
   </div>
@@ -31,7 +40,7 @@
   <div *ngIf="courses else loading">
     <div class="row">
 
-      <div class="col-4" *ngFor="let ct of getCategories();let i=index">
+      <div class="col-12" *ngFor="let ct of getCategories();let i=index">
         <div class="card card-custom gutter-b">
           <div class="card-header card-blue">
             {{ct.name}}
@@ -39,9 +48,9 @@
           <div class="card-body">
             <ul>
               <li *ngFor="let c of filteredCourses[ct.name]">
-                <a routerLink="{{c.code}}">
-                  {{c.code}} - {{c.title}}
-                  <span class="badge badge-primary">{{c.noOfTopics}}
+                <a routerLink="{{c.course_code}}">
+                  {{c.course_code}} - {{c.course_name}}
+                  <span class="badge badge-primary">{{c.completed_topics}} / {{c.no_of_topics}}
                     Topics</span>
                 </a>
               </li>

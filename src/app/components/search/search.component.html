@@ -1,3 +1,49 @@
-<kt-page showSidebar="false">
-  <div class="page-title">Search</div>
-</kt-page>
+<div class="bg_one" style="background-color: cadetblue;">
+  <div class="signin_container">
+    <div class="leftside_box text-center" [ngStyle]="{'background-color':theme.bgColor1}">
+      <div class="text-center">
+        <h4 *ngIf="theme.displayOrgName"><strong>{{theme.orgName}}</strong></h4>
+      </div>
+      <img [src]="theme.logo" width="100px" class="mx-auto d-block text-center" align="center" />
+
+    </div>
+    <div class="rightside_box" [ngStyle]="{'background-color':theme.authBoxRightColor}">
+
+      <div class="text-center" style="padding: 3px 0px 8px 0;">
+        <!-- <img [src]="siteInfo.logo" width="50px" *ngIf="siteInfo"> -->
+        <!-- <div class="auth-title">Search</div> -->
+      </div>
+
+      <div class="rightside_box" [ngStyle]="{'background-color':theme.authBoxRightColor}">
+
+        <div class="text-center" style="padding: 3px 0px 8px 0;">
+          <!-- <img [src]="siteInfo.logo" width="50px" *ngIf="siteInfo"> -->
+          <div class="auth-title">Search by Username</div>
+        </div>
+
+        <form #aForm="ngForm" (ngSubmit)="search()">
+
+          <div class="input-group mb-3">
+
+            <input type="text" class="form-control" placeholder="Enter username or email" id="username" name="username"
+              autocomplete="off" [(ngModel)]="email" required autofocus>
+          </div>
+
+          <br />
+          <button type="submit" [disabled]="aForm.invalid || processing"
+            class="btn btn-info btn-block">{{processing?"Processing
+            ...":"Search"}}</button>
+        </form>
+        <br />
+
+      </div>
+
+
+    </div>
+  </div>
+  <script>
+    let navigator = navigator.userAgent;
+    if (navigator != null && navigator.indexOf("Mobile") != -1) {
+      document.querySelector(".leftside_box").style.display = "none";
+    }
+  </script>

@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-//import { AuthService } from 'auth';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CourseService } from 'src/app/course.service';
-import { AddCourseComponent } from '../add-course/add-course.component';
+import { CourseService } from '../course.service';
+import { DbService } from '../db.service';
 
 @Component({
-  selector: 'app-course-list',
-  templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.css'],
+  selector: 'app-usercourses',
+  templateUrl: './usercourses.component.html',
+  styleUrls: ['./usercourses.component.css'],
 })
-export class CourseListComponent implements OnInit {
+export class UsercoursesComponent implements OnInit {
   breadcrumbItems = [
     { icon: 'home', name: 'Home', link: '/' },
     { name: 'Courses' },
@@ -78,6 +77,16 @@ export class CourseListComponent implements OnInit {
       .getUserCourses(this.loggedInUser)
       .subscribe((res) => {
         this.courses = res;
+        let i = 0;
+        for (let course of this.courses) {
+          let percentage = Math.round(
+            (100 * course.completed_topics) / course.no_of_topics
+          );
+          this.courses[i]['pending'] =
+            course.no_of_topics - course.completed_topics;
+          this.courses[i]['percentage'] = percentage;
+          i++;
+        }
         this.courses.filter((c) => {
           if (this.categories.find((ct) => ct.name == c.category) == null) {
             this.categories.push({ name: c.category, completed: true });
@@ -104,6 +113,7 @@ export class CourseListComponent implements OnInit {
 
   reportData: any = [];
   widgetColors = [
+    'green-haze',
     'purple-plum',
     'blue-madison',
     'green-haze',
@@ -122,11 +132,24 @@ export class CourseListComponent implements OnInit {
     let total = courses.length;
 
     let topics = courses.reduce(function (sum, obj) {
-      return sum + obj.noOfTopics;
+      return sum + obj.no_of_topics;
     }, 0);
+    let completedTopics = courses.reduce(function (sum, obj) {
+      return sum + obj.completed_topics;
+    }, 0);
+    let percentage = Math.round((100 * completedTopics) / topics);
     this.reportData.push({ label: 'Courses', value: total });
     this.reportData.push({ label: 'Category', value: categories });
-    this.reportData.push({ label: 'Topics', value: topics });
+    this.reportData.push({
+      label: 'Topics',
+      value: topics,
+    });
+    this.reportData.push({
+      label: 'Completed',
+      value: completedTopics,
+    });
+    this.reportData.push({ label: 'Pending', value: completedTopics });
+    this.reportData.push({ label: 'Percentage(%)', value: percentage });
   }
 
   menus: any;

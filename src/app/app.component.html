@@ -1,6 +1,12 @@
 <div *ngIf="!isLoggedIn">
+  <kt-header [navbrand]="name" [users]="users" [user]="user" [bgColor]="headerColor" [menus]="getHeaderMenus()">
+  </kt-header>
   <!-- <kt-header [navbrand]="name" [user]="user" [menus]="getHeaderMenus()" [bgColor]="headerColor"></kt-header> -->
-  <kt-auth-layout></kt-auth-layout>
+  <kt-layout>
+    <div class="wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </kt-layout>
 </div>
 
 <div *ngIf="isLoggedIn">
