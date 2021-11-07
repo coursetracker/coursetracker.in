@@ -50,7 +50,7 @@ export class CurriculumListComponent implements OnInit {
     console.log(searchKey);
     if (searchKey != null && searchKey != "") {
       this.courses = this.courseList.filter((obj: any) =>
-        obj.code.toLowerCase().includes(searchKey)  || obj.title.toLowerCase().includes(searchKey)
+        obj.code.toLowerCase().includes(searchKey)  || obj.title.toLowerCase().includes(searchKey) || obj.organization.toLowerCase().includes(searchKey)
       );
     } else {
       this.courses = this.courseList;

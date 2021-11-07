@@ -4,8 +4,12 @@
   
     <div class="p-5 bg-gray-100 grid-view">
       <form class="flex flex-row items-stretch">
-        <input class="bg-gray-200 px-3 py-2 text-gray-700 font-bold" placeholder="Search Course Code/Title"
+        <input class="bg-gray-200 px-3 py-2 text-gray-700 font-bold" list="courseList" placeholder="Search Course Code/Title"
           (keyup)="setProjectSearch($event)" />
+        
+        <datalist id="courseList" *ngIf="courses">
+          <option *ngFor="let course of courses"> {{course.code}} - {{course.title}} </option>
+        </datalist>
         <button type="submit" class="p-2 px-3 bg-yellow-400 text-gray-700 font-bold">
           <i class="fas fa-search    "></i>
         </button>
