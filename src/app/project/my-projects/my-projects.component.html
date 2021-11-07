@@ -1,0 +1,63 @@
+
+<user-header [user]="userId"></user-header>
+<Layout title="My Projects" [showHeader]="false">
+  
+    
+  
+    <table class="w-full border border-collapse">
+      <thead>
+        <tr>
+          <th class="p-4 py-5 text-left bg-gray-700 text-white">
+            Project Title
+          </th>
+          <th class="p-4 py-5 text-left bg-gray-700 text-white">
+            Developer
+          </th>
+          <th class="p-4 py-5 text-left bg-gray-700 text-white">
+            Features
+          </th>
+          <th class="p-4 py-5 text-left bg-gray-700 text-white">
+            Percentage(%)
+          </th>
+  
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let project of projects;let i=index">
+          <tr class="{{i%2==1?'bg-gray-100':''}}">
+            <td class="p-3">
+              <span class="bg-yellow-400 font-bold text-gray-700 p-2 px-3">
+                {{i+1}}</span>
+              <a routerLink="{{project._id}}/features"><span class="text-lg  text-gray-700">
+                  {{project.name}}
+                </span>
+              </a>
+            </td>
+  
+            <td class="p-3">
+              <span class="text-lg  text-gray-700">
+                <a href="https://skills.learn2build.in/{{project.assignedTo}}/courses" target="_blank">
+                  {{project.assignedTo}}
+                </a>
+              </span>
+            </td>
+  
+            <td class="p-3">
+              <span class="text-lg  text-gray-700">
+  
+                {{project.completedFeatures}}/{{project.totalFeatures}}
+              </span>
+            </td>
+  
+            <td class="p-3">
+              <span class="text-lg  text-gray-700">
+                {{project.percentage}} %
+              </span>
+            </td>
+  
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  
+  </Layout>

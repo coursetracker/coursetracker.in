@@ -1,0 +1,54 @@
+<div class="flex flex-row p-3 bg-gray-800 justify-between items-center text-white sticky top-0 z-50">
+  <div class="flex flex-row items-center text-xl pl-2">
+    <div class="cursor-pointer" (click)="onToggleNav(!isNavOpen)"></div>
+    <a routerLink="/" class="text-white"><i class="fas fa-home    "></i></a>
+    <span class="px-5">CourseTracker</span>
+  </div>
+  <div class="flex flex-row items-center justify-center">
+    <div className="bg-white py-5 shadow h-100 flex flex-col side-nav fixed md:sticky top-16">
+      <ng-container *ngFor="let m of menus">
+        <a class="nav-link" (click)="navigate(m.link)">
+          <span class="pl-2">{{m.name}}</span>
+        </a>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="flex flex-row items-center justify-center">
+    <!-- <form class="md:flex flex-row items-stretch hidden">
+      <input class="bg-gray-700 px-3 py-2 text-yellow-400 font-bold" placeholder="Search" />
+      <button type="submit" class="p-2 px-3 bg-yellow-400 text-gray-700 font-bold">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </button>
+    </form> -->
+    <div class="mx-5 hover:bg-gray-700 p-2 w-8 h-8"></div>
+    <span class="flex items-center hover:bg-gray-700 p-2">
+      <span class="mr-2" *ngIf="!authService.isLoggedIn()">
+        <a href="{{authorize_url}}">Login</a>
+      </span>
+
+
+      <span class="mr-2" *ngIf="authService.isLoggedIn()">
+        <img class="h-8 w-8 rounded-full" [src]="authService.getUser().avatar_url" alt="">
+      </span>
+      <span class="mr-2" *ngIf="authService.isLoggedIn()">
+
+        {{authService.getUser().name}}
+      </span>
+      <span class="mr-2" *ngIf="authService.isLoggedIn()">
+
+       
+      </span>
+      <div></div>
+    </span>
+    <span class="flex items-center hover:bg-gray-700 p-2" *ngIf="authService.isLoggedIn()">
+      <span>
+      <button (click)="logout()">
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+
+      </button>
+    </span>
+    </span>
+  </div>
+
+</div>

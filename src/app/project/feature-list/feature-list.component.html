@@ -1,0 +1,87 @@
+<div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+    <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+      <div class="ml-4 mt-2 text-2xl font-bold pb-2 text-gray-700">      
+            Features    
+      </div>
+      <div class="ml-4 mt-2 flex-shrink-0">
+        <button type="button" (click)="addModule()" class="float-right relative inline-flex items-end px-4 py-2 font-bold border border-transparent shadow-sm text-sm rounded-md bold text-grey-700 bg-yellow-400">
+          Add Module
+        </button>
+      </div>
+    </div>    
+  </div>
+
+<div class="flex flex-row items-stretch">
+<div class="ml-2 p-2 flex-grow">
+
+<div class="mb-3 rounded-full" *ngFor="let module of project?.modules;let i=index">
+    <div class="rounded-xl p-4 py-2 text-left bg-gray-700 text-white">Module #{{i+1}}: {{module.name}}
+
+        <button *ngIf="mode!='edit'" type="button" class="text-white float-right"
+            (click)="selectedModule=module.name;mode='edit';"> &nbsp; <i class="fas fa-plus"
+                aria-hidden="true"></i></button>
+        <button *ngIf="selectedModule == module.name && mode=='edit'" type="button" class="text-white float-right"
+            (click)="selectedModule='';mode='view';"> &nbsp; <i class="fas fa-plus "
+                aria-hidden="true"></i></button>
+    </div>
+
+
+    <div class="bg-white shadow overflow-hidden sm:rounded-md">
+        
+
+  
+        <ul class="divide-y divide-gray-200">
+            <li *ngFor="let feature of module.features">
+                <a href="#" routerLink="{{feature._id}}" class="block hover:bg-grey-400">
+                    <div class="px-4 py-4 sm:px-6">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-medium text-indigo-600 truncate">
+                                {{feature.name}}
+                            </p>
+                            <div class="ml-2 flex-shrink-0 flex">
+                                <p
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    {{feature.status}}
+
+                                </p>
+                                <p
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+
+                                    {{feature.createdDate | date}}
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="selectedModule == module.name && mode=='edit'" class="mt-3">
+        <form #featureForm="ngForm" autocomplete="off" (ngSubmit)="addFeature(module._id, feature)" class="bg-white shadow overflow-hidden sm:rounded-md">
+            <div class="flex items-center justify-between">
+                <input type="text" name="task"
+                    class="w-full h-12 px-4 mb-2 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                    [(ngModel)]="feature.name" autofocus autocomplete="off" required placeholder="Enter Feature Name" />
+                &nbsp;
+                &nbsp; <button [disabled]="featureForm.invalid" class="p-2 px-3 bg-yellow-400 text-gray-700 font-bold">
+                    
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+                &nbsp;
+                &nbsp; <button type="reset" (click)="reset()" class="p-2 px-3 bg-red-400 text-gray-700 font-bold">
+                    
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+   
+
+</div>
+
+
+</div>
+</div>

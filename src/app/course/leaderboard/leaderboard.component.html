@@ -1,0 +1,95 @@
+<Layout title="Course LeaderBoard">
+
+    
+    <!-- <div class="p-5 bg-gray-100 grid-view">
+        <form class="flex flex-row items-stretch">
+            <input
+              class="bg-gray-200 px-3 py-2 text-gray-700 font-bold"
+              placeholder="Search Project Name"
+              (keyup)="setProjectSearch($event)"
+            />
+            <button
+              type="submit"
+              class="p-2 px-3 bg-yellow-400 text-gray-700 font-bold"
+            >
+            <i class="fas fa-search    "></i>
+            </button>
+          </form>
+
+        <form class="pl-5 flex flex-row items-stretch">
+          <input
+            class="bg-gray-200 px-3 py-2 text-gray-700 font-bold"
+            placeholder="Search Developer"
+            (keyup)="setStudentSearch($event)"
+          />
+          <button
+            type="submit"
+            class="p-2 px-3 bg-yellow-400 text-gray-700 font-bold"
+          >
+            <i class="fas fa-search    "></i>
+          </button>
+        </form>
+       
+        </div> -->
+
+    <table class="w-full border border-collapse">
+        <thead>
+            <tr>
+                <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                    Name
+                </th>
+            
+                <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                    # Courses
+                </th>
+              <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                # Topics
+            </th>
+              <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                Points
+            </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            
+          <ng-container *ngFor="let course of courseData;let i=index">
+            <tr  class="{{i%2==1?'bg-gray-100':''}}">                
+                
+                <td class="p-3">
+                    <span class="bg-yellow-400 font-bold text-gray-700 p-2 px-3">
+                        {{i+1}}</span>
+                        &nbsp;
+                    <a routerLink="{{course.user_id}}"><span class="text-lg  text-gray-700">
+                    
+                    {{course.user_id}}
+                </span>
+                </a>
+                </td>
+
+                <td class="p-3">
+                    <span class="text-lg  text-gray-700">
+                    {{course.courses}}
+                </span>
+                </td>
+
+                <td class="p-3">
+                    <span class="text-lg  text-gray-700">
+                    {{course.completed}}
+                </span>
+                </td>
+
+                <td class="p-3">
+                  <span class="text-lg  text-gray-700">
+                    
+                  {{course.points}}
+              </span>
+              </td>
+
+
+            </tr>
+          </ng-container>
+        </tbody>
+    </table>
+    
+</Layout>

@@ -1,0 +1,37 @@
+<div class="m-5">
+    <div class="pb-5 border-b border-gray-200 sm:pb-0">
+        <!-- <h3 class="text-lg leading-6 font-medium text-gray-900"> -->
+        <div class="ml-4 mt-2 text-2xl font-bold pb-2 text-gray-700">
+            Curriculum
+            <button type="button"
+                class="align-right ml-10 content-center px-4 py-2 font-bold border border-transparent shadow-sm text-sm rounded-md bold text-grey-700 bg-yellow-400"
+                (click)="printPage()">Print</button>
+        </div>
+        <div>
+            <div class="flex flex-row items-stretch">
+                <div class="ml-2 p-2 flex-grow">
+
+                    <div class="mb-3 rounded-full" *ngFor="let module of course?.modules;let i=index">
+                        <div class="rounded-xl p-4 py-2 text-left bg-gray-700 text-white">Module #{{i+1}}:
+                            {{module.name}}
+
+                            <!-- <button *ngIf="mode!='edit'" type="button" class="text-white float-right"
+                    (click)="selectedModule=module.name;mode='edit';"> &nbsp; <i class="fas fa-plus"
+                        aria-hidden="true"></i></button>
+                <button *ngIf="selectedModule == module.name && mode=='edit'" type="button"
+                    class="text-white float-right" (click)="selectedModule='';mode='view';"> &nbsp; <i
+                        class="fas fa-plus " aria-hidden="true"></i></button> -->
+                        </div>
+
+                        <div class="m-2 pl-4">
+                            <!-- {{getTopics(module.topics)}} -->
+                            <ul>
+                                <li *ngFor="let topic of module.topics">{{topic.name}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>

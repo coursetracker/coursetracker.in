@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap");
+
+@import '~ngx-toastr/toastr';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Lato", sans-serif;
+}
+
+*:focus {
+  outline: none;
+}
+
+.grid-view {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+}
+
+.login-background {
+  background: url("/login.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.logo {
+  font-size: 3em;
+}
+
+.banner {
+  font-size: 10em;
+}
+
+input:checked + svg {
+  display: block;
+}
+
+.side-nav {
+  height: calc(100vh - 4.5rem);
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+canvas{
+  height: 100%;
+  width: 100%;
+}

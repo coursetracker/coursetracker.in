@@ -1,0 +1,12 @@
+<span *ngIf="badges">
+<ng-container *ngFor="let badge of getBadges()">
+    <span *ngIf="badge == 'money'">
+        💰
+    </span>
+
+    <span *ngIf="badge=='redflag'">
+        🚩
+    </span>
+
+</ng-container>
+</span>

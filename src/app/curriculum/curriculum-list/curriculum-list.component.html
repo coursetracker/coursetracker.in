@@ -1,0 +1,89 @@
+<Layout title="CourseBoard" [showHeader]="true">
+
+    <!-- <button (click)="complete()" type="button">Show</button> -->
+  
+    <div class="p-5 bg-gray-100 grid-view">
+      <form class="flex flex-row items-stretch">
+        <input class="bg-gray-200 px-3 py-2 text-gray-700 font-bold" placeholder="Search Course Code/Title"
+          (keyup)="setProjectSearch($event)" />
+        <button type="submit" class="p-2 px-3 bg-yellow-400 text-gray-700 font-bold">
+          <i class="fas fa-search    "></i>
+        </button>
+      </form>
+<!--   
+      <form class="pl-5 flex flex-row items-stretch">
+        <input class="bg-gray-200 px-3 py-2 text-gray-700 font-bold" placeholder="Search Developer"
+          (keyup)="setStudentSearch($event)" />
+        <button type="submit" class="p-2 px-3 bg-yellow-400 text-gray-700 font-bold">
+          <i class="fas fa-search    "></i>
+        </button>
+      </form> -->
+  
+    </div>
+  
+  
+    <table class="w-full border border-collapse">
+      <thead>
+        <tr>
+          <th class="p-4 py-5 text-left bg-gray-700 text-white">
+            Course Title
+          </th>
+         
+          <th class="p-4 py-5 text-left bg-gray-700 text-white">
+            Provider
+          </th>
+           <th class="p-4 py-5 text-left bg-gray-700 text-white">
+            <!-- Percentage(%) -->
+          </th>
+          <th class="p-4 py-5 text-left bg-gray-700 text-white">
+            <!-- Percentage(%) -->
+          </th>
+   
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <!-- <td>{{courses | json}}</td> -->
+          </tr>
+        <ng-container *ngFor="let course of courses;let i=index">
+          <tr class="{{i%2==1?'bg-gray-100':''}}">
+            <td class="p-3">
+              <span class="bg-yellow-400 font-bold text-gray-700 p-2 px-3">
+                {{i+1}}</span>
+              <a routerLink="{{course.code}}"><span class="text-lg  text-gray-700">
+                  {{course.title}} ( {{course.code}} )
+                </span>
+                <span class="text-lg  text-gray-700">
+                  <!-- <badge [badges]='course?.badges'></badge> -->
+                </span>
+  
+              </a>
+            </td>
+            <td class="p-3">
+               <span class="text-lg  text-gray-700">
+               {{course.organization | uppercase}}
+              <!--  <a href="https://skills.learn2build.in/{{course.assignedTo}}/courses" target="_blank">
+                  {{course.assignedTo}}
+                </a> -->
+              </span>
+            </td>
+  
+            <td class="p-3">
+              <span class="text-lg  text-gray-700">
+  
+                <!-- {{course.completedFeatures}}/{{course.totalFeatures}} -->
+              </span>
+            </td>
+  
+            <td class="p-3">
+              <span class="text-lg  text-gray-700">
+                <!-- {{course.percentage}} % -->
+              </span>
+            </td>
+  
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  
+  </Layout>

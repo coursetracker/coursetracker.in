@@ -1,0 +1,109 @@
+<div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+    <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+      <div class="ml-4 mt-2 text-2xl font-bold pb-2 text-gray-700">      
+            Feature - {{feature?.name}} 
+            ( Status: {{feature?.status}} )
+           
+      </div>
+      <div>
+
+      </div>
+      <div class="ml-4 mt-2 flex-shrink-0 float-right" *ngIf="feature">
+        <button type="button" *ngIf="mode!='edit'" (click)="mode='edit'"  class="mr-2 relative inline-flex items-end px-4 py-2 font-bold border border-transparent shadow-sm text-sm rounded-md bold text-grey-700 bg-yellow-400">
+          Edit
+        </button>
+        <!-- <button type="button" *ngIf="mode=='edit'" disabled="true" (click)="deleteFeature()" class="mr-2 relative inline-flex items-end px-4 py-2 font-bold border border-transparent shadow-sm text-sm rounded-md bold text-grey-700 bg-yellow-400">
+            Delete
+          </button> -->
+        &nbsp;
+        <button type="button" *ngIf="mode=='view' && feature.status=='PENDING'" (click)="updateStatus('IN_PROGRESS')" class="mr-2 relative inline-flex items-end px-4 py-2 font-bold border border-transparent shadow-sm text-sm rounded-md bold text-grey-700 bg-yellow-400">
+            Start
+          </button>
+        <button type="button" *ngIf="mode=='view' && feature.status=='IN_PROGRESS'" (click)="updateStatus('COMPLETED')" class="mr-2 relative inline-flex items-end px-4 py-2 font-bold border border-transparent shadow-sm text-sm rounded-md bold text-grey-700 bg-green-400">
+            Mark as Completed
+          </button>
+        &nbsp;
+        <button type="button" *ngIf="mode=='view' && feature.status=='IN_PROGRESS'" (click)="updateStatus('PENDING')" class="mr-2 relative inline-flex items-end px-4 py-2 font-bold border border-transparent shadow-sm text-sm rounded-md bold text-grey-700 bg-red-400">
+            Cancel
+          </button>
+        &nbsp;
+        <button type="button" *ngIf="mode=='view' && feature.status=='COMPLETED'" (click)="updateStatus('IN_PROGRESS')" class="mr-2 relative inline-flex items-end px-4 py-2 font-bold border border-transparent shadow-sm text-sm rounded-md bold text-grey-700 bg-red-400">
+            ReOpen
+          </button>
+        &nbsp;
+
+      </div>
+    </div>    
+  </div>
+
+<div title="{{project?.name}}" *ngIf="feature">
+
+    <div class="m-10 mr-10">
+        <h5>User Story</h5>
+
+        <div [innerHTML]="feature.description | markdown" *ngIf="mode!='edit'"></div>
+
+        <form (ngSubmit)="updateFeatureDescription()" *ngIf="mode=='edit'">
+            <div >
+        <textarea name="description" rows="10" cols="80" *ngIf="mode=='edit'" [(ngModel)]="feature.description" required>
+            {{feature.description}}
+        </textarea>
+    </div>
+    <div>
+        <button
+        class="mr-2 relative inline-flex items-end px-4 py-2 font-bold border border-transparent shadow-sm text-sm rounded-md bold text-grey-700 bg-yellow-400"
+        >Submit</button>
+        <button type="reset" (click)="mode='view'">Cancel</button>
+
+    </div>
+        </form>
+    </div>
+
+    <table class="w-full border border-collapse" *ngIf="feature && feature.tasks && feature.tasks.length>0">
+        <thead>
+            <tr>
+                <th class="p-4 py-2 text-left bg-gray-700 text-white">
+                    #
+                </th>
+                <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                    Task Name
+                </th>
+                <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                    Assigned To
+                </th>
+                <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                    Status
+                </th>
+
+            </tr>
+        </thead>
+        <tbody *ngIf="feature.tasks">
+            <tr *ngFor="let task of feature.tasks;let i=index" class="even:bg-gray-100">
+                <td class="p-3">
+                    <span class="text-lg  text-gray-700">
+                        {{i+1}}</span>
+                </td>
+                <td class="p-3">
+                    <span class="text-lg  text-gray-700">
+                        {{task.name}}
+                    </span>
+                </td>
+
+                <td class="p-3">
+                    <span class="text-lg  text-gray-700">
+                        {{task.assignedTo}}
+                    </span>
+                </td>
+
+                <td class="p-3">
+                    <span class="text-lg  text-gray-700">
+                        {{task.status}}
+                    </span>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+

@@ -1,0 +1,71 @@
+<div class="m-5">
+
+    <div class="pb-5 border-b border-gray-200 sm:pb-0">
+        <!-- <h3 class="text-lg leading-6 font-medium text-gray-900"> -->
+            <div class="ml-4 mt-2 text-2xl font-bold pb-2 text-gray-700">
+                Leaderboard
+                <button type="button" class="align-right ml-10 content-center px-4 py-2 font-bold border border-transparent shadow-sm text-sm rounded-md bold text-grey-700 bg-yellow-400" (click)="printPage()">Print</button> 
+            </div>
+    <div>
+
+    <table class="w-full border border-collapse">
+        <thead>
+            <tr>
+                <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                    Name
+                </th>
+            
+                <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                    # Courses
+                </th>
+              <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                # Topics
+            </th>
+              <th class="p-4 py-5 text-left bg-gray-700 text-white">
+                Points
+            </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            
+          <ng-container *ngFor="let course of courseData;let i=index">
+            <tr  class="{{i%2==1?'bg-gray-100':''}}">                
+                
+                <td class="p-3">
+                    <span class="bg-yellow-400 font-bold text-gray-700 p-2 px-3">
+                        {{i+1}}</span>
+                        &nbsp;
+                    <a routerLink="/coursereport/{{course.user_id}}"><span class="text-lg  text-gray-700">
+                    
+                    {{course.user_id}}
+                </span>
+                </a>
+                </td>
+
+                <td class="p-3">
+                    <span class="text-lg  text-gray-700">
+                    {{course.courses}}
+                </span>
+                </td>
+
+                <td class="p-3">
+                    <span class="text-lg  text-gray-700">
+                    {{course.completed}}
+                </span>
+                </td>
+
+                <td class="p-3">
+                  <span class="text-lg  text-gray-700">
+                    
+                  {{course.points}}
+              </span>
+              </td>
+
+
+            </tr>
+          </ng-container>
+        </tbody>
+    </table>
+    
+</div>

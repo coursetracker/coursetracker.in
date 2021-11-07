@@ -1,0 +1,18 @@
+<div class="flex flex-row p-3 bg-gray-800 justify-between items-center text-white sticky top-0 z-50">
+    <div class="flex flex-row items-center text-xl pl-2">
+        <div class="cursor-pointer" (click)="onToggleNav(!isNavOpen)"></div>
+        <span class="">
+            <a routerLink="/" class="text-white"><i class="fas fa-home    "></i></a>
+          </span>
+        <span class="px-5">{{course.code}}- {{course.title}}</span>
+    </div>
+    <div class="flex flex-row items-center justify-center">
+        <div className="bg-white py-5 shadow h-100 flex flex-col side-nav fixed md:sticky top-16">
+            <ng-container *ngFor="let m of menus">
+                <a class="nav-link" (click)="navigate(m.link)">
+                    <span class="pl-5">{{m.name}}</span>
+                </a>
+            </ng-container>
+        </div>
+    </div>
+</div>

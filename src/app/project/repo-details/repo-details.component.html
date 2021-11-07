@@ -1,0 +1,47 @@
+<!-- 
+<app-github-header [repository]="repository"></app-github-header> -->
+<div class="flex flex-row items-stretch" *ngIf="repository">
+
+
+    <div class="ml-2 p-2 flex-grow">
+        <h1 class="text-2xl font-bold pb-2 text-gray-700">
+            Repository Details
+        
+        <span>
+        <a href="https://github.com/{{owner}}/{{repo}}" target="_blank" class="ml-2 mr-2 p5-3"><i class="fab fa-github" aria-hidden="true"></i></a> 
+
+    </span>
+</h1>
+
+<h1 class="text-2xl font-bold pb-2 text-gray-700">Branches</h1>
+<ul>
+  <li *ngFor="let branch of repository.branches"> {{branch.name}}</li>
+</ul>
+<!-- <div>
+    <app-sonarcloud [owner]="owner" [repo]="repo"></app-sonarcloud>
+</div> -->
+
+<!-- <div class="container bg-gray-200 mx-auto w-full h-full"> -->
+    <div class="container mx-auto w-full h-full">
+<div class="relative wrap overflow-hidden p-10 h-full">
+<div class="border-2-2 absolute border-opacity-20 border-gray-700 h-full border" style="left: 50%"></div>
+<!-- right timeline -->
+<ng-container *ngFor="let commit of repository.commits;let i=index;let j=last; let even=even;">
+<div class="mb-0 flex justify-between w-full" [ngClass]="even?'items-center right-timeline':'flex-row-reverse items-center left-timeline'">
+  <div class="order-1 w-5/12"></div>
+  <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-8 h-8 rounded-full" >
+    <h1 class="mx-auto font-semibold text-lg text-white">{{i+1}}</h1>
+  </div>
+  <div class="order-1 {{getColor(commit)}} rounded-lg shadow-xl w-5/12 px-6 py-4">
+    <h3 class="mb-3 font-bold text-gray-800 text-xl">{{commit.message}}</h3>
+    <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">{{commit.name}} - {{commit.date | momenttime}}</p>
+  </div>
+</div>
+
+
+</ng-container>
+
+</div>
+</div>
+</div>
+</div>

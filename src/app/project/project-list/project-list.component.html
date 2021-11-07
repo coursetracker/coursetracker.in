@@ -1,0 +1,85 @@
+<Layout title="ProjectBoard" [showHeader]="true">
+
+  <!-- <button (click)="complete()" type="button">Show</button> -->
+
+  <div class="p-5 bg-gray-100 grid-view">
+    <form class="flex flex-row items-stretch">
+      <input class="bg-gray-200 px-3 py-2 text-gray-700 font-bold" placeholder="Search Project Name"
+        (keyup)="setProjectSearch($event)" />
+      <button type="submit" class="p-2 px-3 bg-yellow-400 text-gray-700 font-bold">
+        <i class="fas fa-search    "></i>
+      </button>
+    </form>
+
+    <form class="pl-5 flex flex-row items-stretch">
+      <input class="bg-gray-200 px-3 py-2 text-gray-700 font-bold" placeholder="Search Developer"
+        (keyup)="setStudentSearch($event)" />
+      <button type="submit" class="p-2 px-3 bg-yellow-400 text-gray-700 font-bold">
+        <i class="fas fa-search    "></i>
+      </button>
+    </form>
+
+  </div>
+
+
+  <table class="w-full border border-collapse">
+    <thead>
+      <tr>
+        <th class="p-4 py-5 text-left bg-gray-700 text-white">
+          Project Title
+        </th>
+       
+        <th class="p-4 py-5 text-left bg-gray-700 text-white">
+          Developer
+        </th>
+        <th class="p-4 py-5 text-left bg-gray-700 text-white">
+          Features
+        </th>
+        <th class="p-4 py-5 text-left bg-gray-700 text-white">
+          Percentage(%)
+        </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let project of projects;let i=index">
+        <tr class="{{i%2==1?'bg-gray-100':''}}">
+          <td class="p-3">
+            <span class="bg-yellow-400 font-bold text-gray-700 p-2 px-3">
+              {{i+1}}</span>
+            <a routerLink="{{project._id}}/features"><span class="text-lg  text-gray-700">
+                {{project.name}} 
+              </span>
+              <span class="text-lg  text-gray-700">
+                <badge [badges]='project.badges'></badge>
+              </span>
+
+            </a>
+          </td>
+          <td class="p-3">
+            <span class="text-lg  text-gray-700">
+              <a href="https://skills.learn2build.in/{{project.assignedTo}}/courses" target="_blank">
+                {{project.assignedTo}}
+              </a>
+            </span>
+          </td>
+
+          <td class="p-3">
+            <span class="text-lg  text-gray-700">
+
+              {{project.completedFeatures}}/{{project.totalFeatures}}
+            </span>
+          </td>
+
+          <td class="p-3">
+            <span class="text-lg  text-gray-700">
+              {{project.percentage}} %
+            </span>
+          </td>
+
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+</Layout>

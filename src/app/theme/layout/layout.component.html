@@ -1,0 +1,11 @@
+
+<HeaderBar [toggleNav]="toggleNav" [isNavOpen]="isNavOpen" [showHeader]="showHeader" *ngIf="showHeader"> </HeaderBar>
+<div class="flex flex-row items-stretch">
+
+    <div class="ml-5 p-5 flex-grow">
+        <h1 class="text-2xl font-bold pb-2 text-gray-700">
+            {{title}}
+        </h1>
+        <ng-content></ng-content>
+    </div>
+</div>
